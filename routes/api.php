@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Authcontroller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/login', [Authcontroller::class, 'login'])->name('login');
+
+//rutas protegidas con sanctum
+Route::middleware('auth:sanctum')->group(function () {
+    //mostrar todos los productos
+    Route::get('products', [ProductController::class, 'index']);
+    //filtrar productos por categoria
+    Route::get('products/category/{category_id}', [ProductController::class, 'filterByCategory']);
+});
+
