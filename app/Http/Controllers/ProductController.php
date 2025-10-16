@@ -54,8 +54,9 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
            //Guardar la imagen usando move en public/uploads y guardar solo el nombre en la base de datos
            $image = $request->file('image');
-           $image->move(public_path('uploads'), $image->getClientOriginalName());
-           $validatedData['image'] = $image->getClientOriginalName();
+           $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+           $image->move(public_path('uploads'), $imageName);
+           $validatedData['image'] = $imageName;
         }
 
         // Asignar el usuario propietario del producto.
