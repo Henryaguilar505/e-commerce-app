@@ -28,5 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('products', [ProductController::class, 'index']);
     //filtrar productos por categoria
     Route::get('products/category/{category_id}', [ProductController::class, 'filterByCategory']);
+    //alamcenar productos
+    Route::post('products', [ProductController::class, 'store']);
 });
 
