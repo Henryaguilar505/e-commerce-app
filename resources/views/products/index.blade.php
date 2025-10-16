@@ -25,9 +25,8 @@
 						<tr>
 							<td style="width:120px">
 								@if($product->image)
-									<img src="{{ $product->image }}" alt="{{ $product->name }}" class="img-fluid" style="max-height:80px">
-								@else
-									—
+                            {{-- change here --}}
+                                    <img src="{{ asset('uploads') .'/' . $product->image }}" alt="{{ $product->name }}" class="img-fluid">
 								@endif
 							</td>
 							<td>{{ $product->name }}</td>

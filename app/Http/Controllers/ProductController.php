@@ -17,7 +17,7 @@ class ProductController extends Controller
             $products = Product::all();
             //agregar a la imagen la url completa
             foreach ($products as $product) {
-                $product->image = url('storage/products/' . $product->image);
+                $product->image = url('uploads/' . $product->image);
             }
             return response()->json($products, 200);
         } catch (\Exception $e) {
@@ -52,8 +52,10 @@ class ProductController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('public/products');
-            $validatedData['image'] = basename($path);
+           //Guardar la imagen usando move en public/uploads y guardar solo el nombre en la base de datos
+           $image = $request->file('image');
+           $image->move(public_path('uploads'), $image->getClientOriginalName());
+           $validatedData['image'] = $image->getClientOriginalName();
         }
 
         // Asignar el usuario propietario del producto.
@@ -102,10 +104,7 @@ class ProductController extends Controller
     //mostrar todos los productos en una vista
     public function indexAll(){
         $products = Product::all();
-        //agregar a la imagen la url completa
-        foreach ($products as $product) {
-            $product->image = url('storage/products/' . $product->image);
-        }
+       
         return view('products.index', compact('products'));
     }
 }
