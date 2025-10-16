@@ -15,6 +15,10 @@ class ProductController extends Controller
     {
         try {
             $products = Product::all();
+            //agregar a la imagen la url completa
+            foreach ($products as $product) {
+                $product->image = url('storage/products/' . $product->image);
+            }
             return response()->json($products, 200);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Error al obtener los productos', 'error' => $e->getMessage()], 500);
@@ -98,6 +102,10 @@ class ProductController extends Controller
     //mostrar todos los productos en una vista
     public function indexAll(){
         $products = Product::all();
+        //agregar a la imagen la url completa
+        foreach ($products as $product) {
+            $product->image = url('storage/products/' . $product->image);
+        }
         return view('products.index', compact('products'));
     }
 }
