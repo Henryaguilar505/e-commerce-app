@@ -16,7 +16,7 @@ class ProductSeeder extends Seeder
         DB::table('products')->insert([
             [
             'id'=>1,
-            'name'=> 'CD almbum the dark side of te moon',
+            'name'=> 'CD album the dark side of te moon',
             'description' => 'CD coleccionable de Pink floyd - The dark side of the moon lanzado en 1973',
             'price'=> 29.99,
             'stock' => 25,
@@ -26,7 +26,7 @@ class ProductSeeder extends Seeder
             ],
              [
             'id'=>2,
-            'name'=> 'CD almbum Appetite for Destruction',
+            'name'=> 'CD album Appetite for Destruction',
             'description' => 'CD coleccionable de Guns and roses - Appetite for Destruction lanzado en 1987',
             'price'=> 29.99,
             'stock' => 15,

@@ -28,6 +28,9 @@ Route::get('products', [ProductController::class, 'index']);
     //filtrar productos por categoria
 Route::get('products/category/{category_id}', [ProductController::class, 'filterByCategory']);
 
+    //Categorias
+   //mostrar todas las categorias
+Route::get('categories', [CategoryController::class, 'index']);
 
 //rutas protegidas con sanctum
 Route::middleware('auth:sanctum')->group(function () {
@@ -38,8 +41,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //actualizar producto
     Route::put('products/{id}', [ProductController::class, 'update']);
 
-    //Categorias
-    Route::get('categories', [CategoryController::class, 'index']);
+
 
 
 
