@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Authcontroller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Authcontroller;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,15 +31,15 @@ Route::get('products/category/{category_id}', [ProductController::class, 'filter
 
 //rutas protegidas con sanctum
 Route::middleware('auth:sanctum')->group(function () {
-   
-
     //almacenar productos
     Route::post('products', [ProductController::class, 'store']);
-   
     //eliminar producto
     Route::delete('products/{id}', [ProductController::class, 'destroy']);
     //actualizar producto
     Route::put('products/{id}', [ProductController::class, 'update']);
+
+    //Categorias
+    Route::get('categories', [CategoryController::class, 'index']);
 
 
 
