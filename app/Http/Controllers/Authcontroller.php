@@ -25,4 +25,11 @@ class Authcontroller extends Controller
 
         return response()->json(['error' => 'Credenciales inválidas'], 401);
     }
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json(['message' => 'Sesión cerrada correctamente'], 200);
+    }
 }

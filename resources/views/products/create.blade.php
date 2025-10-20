@@ -37,11 +37,11 @@
 		</div>
 
 		<div class="mb-3">
-			<label for="categories_id" class="form-label">Categoría</label>
-			<select name="categories_id" id="categories_id" class="form-control" required>
+			<label for="category_id" class="form-label">Categoría</label>
+			<select name="category_id" id="category_id" class="form-control" required>
 				<option value="">-- Selecciona una categoría --</option>
 				@foreach($categories as $category)
-					<option value="{{ $category->id }}" {{ old('categories_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+					<option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
 				@endforeach
 			</select>
 		</div>

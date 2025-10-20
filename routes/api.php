@@ -28,9 +28,18 @@ Route::middleware('auth:sanctum')->group(function () {
    
     //filtrar productos por categoria
     Route::get('products/category/{category_id}', [ProductController::class, 'filterByCategory']);
-    //alamcenar productos
+    //almacenar productos
     Route::post('products', [ProductController::class, 'store']);
      //mostrar todos los productos
     Route::get('products', [ProductController::class, 'index']);
+    //eliminar producto
+    Route::delete('products/{id}', [ProductController::class, 'destroy']);
+    //actualizar producto
+    Route::put('products/{id}', [ProductController::class, 'update']);
+
+
+
+    //cerrar sesion
+    Route::post('/logout', [Authcontroller::class, 'logout'])->name('logout');
 });
 

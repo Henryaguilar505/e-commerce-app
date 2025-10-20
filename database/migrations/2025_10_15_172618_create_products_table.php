@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->decimal('price', 10, 2, true);
             $table->integer('stock')->unsigned();
-            $table->string('image');
+            $table->string('image')->default('default.jpg');
             $table->timestamps();
 
             //llave foranea para usuario

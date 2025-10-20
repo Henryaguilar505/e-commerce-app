@@ -29,7 +29,7 @@ class ProductController extends Controller
     public function filterByCategory($category_id)
     {
         try {
-            $products = Product::where('categories_id', $category_id)->get();
+            $products = Product::where('category_id', $category_id)->get();
             return response()->json($products, 200);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Error al filtrar los productos por categoría', 'error' => $e->getMessage()], 500);
@@ -47,8 +47,8 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
-            'image' => 'required|image|max:2048',
-            'categories_id' => 'required|exists:categories,id',
+            'image' => 'image|max:2048|mimes:jpeg,png,jpg,svg,webp',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
         if ($request->hasFile('image')) {
@@ -61,7 +61,7 @@ class ProductController extends Controller
 
         // Asignar el usuario propietario del producto.
         // Si hay un usuario autenticado, usar su id. Si no, usar 1 como fallback.
-        $validatedData['users_id'] = Auth::check() ? Auth::id() : 1;
+        $validatedData['user_id'] = Auth::check() ? Auth::id() : 1;
 
         $product = Product::create($validatedData);
             return response()->json($product, 201);
@@ -83,17 +83,44 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Product $id)
     {
-        //
+        try {
+            $validatedData = $request->validate([
+                'name' => 'sometimes|required|string|max:100',
+                'description' => 'sometimes|nullable|string',
+                'price' => 'sometimes|required|numeric|min:0',
+                'stock' => 'sometimes|required|integer|min:0',
+                'image' => 'sometimes|image|max:2048|mimes:jpeg,png,jpg,svg,webp',
+                'category_id' => 'sometimes|required|exists:categories,id',
+            ]);
+
+            if ($request->hasFile('image')) {
+                //Guardar la imagen usando move en public/uploads y guardar solo el nombre en la base de datos
+                $image = $request->file('image');
+                $imageName = uniqid() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('uploads'), $imageName);
+                $validatedData['image'] = $imageName;
+            }
+
+            $id->update($validatedData);
+            return response()->json($id, 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error al actualizar el producto', 'error' => $e->getMessage()], 400);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy(Product $id)
     {
-        //
+        try {
+            $id->delete();
+            return response()->json(['message' => 'Producto eliminado correctamente'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Error al eliminar el producto', 'error' => $e->getMessage()], 500);
+        }
     }
 
     //formulario de productos
