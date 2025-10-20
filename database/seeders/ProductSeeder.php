@@ -20,9 +20,9 @@ class ProductSeeder extends Seeder
             'description' => 'CD coleccionable de Pink floyd - The dark side of the moon lanzado en 1973',
             'price'=> 29.99,
             'stock' => 25,
-            'image' => 'https://tse4.mm.bing.net/th/id/OIP.pNbqWq1EjFsAtHnJwKoYcwHaHa?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3',
-            'users_id'=>1,
-            'categories_id' => 1,
+            'image' => 'default.jpg',
+            'user_id'=>1,
+            'category_id' => 1,
             ],
              [
             'id'=>2,
@@ -30,9 +30,9 @@ class ProductSeeder extends Seeder
             'description' => 'CD coleccionable de Guns and roses - Appetite for Destruction lanzado en 1987',
             'price'=> 29.99,
             'stock' => 15,
-            'image' => 'https://www.obivinilos.cl/wp-content/uploads/2021/12/Guns-N-Roses-Appetite-For-Destruction.jpg',
-            'users_id'=>1,
-            'categories_id' => 1,
+            'image' => 'default.jpg',
+            'user_id'=>1,
+            'category_id' => 1,
             ],
              [
             'id'=>3,
@@ -40,9 +40,9 @@ class ProductSeeder extends Seeder
             'description' => 'Camiseta de nirvana logo del album in utero',
             'price'=> 16.99,
             'stock' => 15,
-            'image' => 'https://tse1.mm.bing.net/th/id/OIP.5EcOiPjvOCM1MbyJM8WEugHaHa?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3',
-            'users_id'=>1,
-            'categories_id' => 2,
+            'image' => 'default.jpg',
+            'user_id'=>1,
+            'category_id' => 2,
             ],
 
         ]);

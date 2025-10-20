@@ -22,8 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/login', [Authcontroller::class, 'login'])->name('login');
 
- //mostrar todos los productos
-    Route::get('products', [ProductController::class, 'index']);
+
 //rutas protegidas con sanctum
 Route::middleware('auth:sanctum')->group(function () {
    
@@ -31,5 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('products/category/{category_id}', [ProductController::class, 'filterByCategory']);
     //alamcenar productos
     Route::post('products', [ProductController::class, 'store']);
+     //mostrar todos los productos
+    Route::get('products', [ProductController::class, 'index']);
 });
 

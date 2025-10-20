@@ -15,12 +15,12 @@ class Product extends Model
         'price',
         'stock',
         'image',
-        'users_id',
-        'categories_id'
+        'user_id',
+        'category_id'
     ];
 
     //relacion de muchos a uno con category
     public function category(){
-        return $this->belongsTo(Category::class, 'categories_id');  
+        return $this->belongsTo(Category::class, 'category_id');  
     }
 }

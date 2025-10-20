@@ -43,7 +43,7 @@ class ProductController extends Controller
     {
         try {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:100',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
@@ -66,7 +66,7 @@ class ProductController extends Controller
         $product = Product::create($validatedData);
             return response()->json($product, 201);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Error al almacenar el producto', 'error' => $e->getMessage()], 500);
+            return response()->json(['message' => 'Error al almacenar el producto', 'error' => $e->getMessage()], 400);
         }
     }
 
